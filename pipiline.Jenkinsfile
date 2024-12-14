@@ -1,23 +1,59 @@
 pipeline {
     agent any
-
+    environment {
+        MINIKUBE_STATUS = "UNKNOWN"
+    }
     stages {
-        stage('Build') {
+        stage('Check Minikube Status') {
             steps {
-                echo 'Iniciando o Build...'
+                script {
+                    // Verifica o status do cluster Minikube
+                    MINIKUBE_STATUS = sh(
+                        script: "minikube status --format '{{.Host}}'",
+                        returnStdout: true
+                    ).trim()
+                    
+                    // Exibe o status no console
+                    echo "Minikube status: ${MINIKUBE_STATUS}"
+                }
             }
         }
-
-        stage('Test') {
+        stage('Start Minikube (if stopped)') {
+            when {
+                expression { MINIKUBE_STATUS == 'Stopped' }
+            }
             steps {
-                echo 'Executando testes...'
+                echo 'Minikube is stopped. Starting the cluster...'
+                sh 'minikube start --driver=docker'
             }
         }
-
-        stage('Deploy') {
+        stage('Cluster Verification') {
             steps {
-                echo 'Deploy do Olá Mundo realizado com sucesso!'
+                script {
+                    // Verifica se o cluster está ativo após a inicialização
+                    def kubeNodes = sh(
+                        script: "kubectl get nodes --no-headers | wc -l",
+                        returnStdout: true
+                    ).trim()
+                    
+                    if (kubeNodes.toInteger() > 0) {
+                        echo "Cluster is running with ${kubeNodes} node(s)."
+                    } else {
+                        error "Failed to start the Minikube cluster."
+                    }
+                }
             }
+        }
+    }
+    post {
+        always {
+            echo "Pipeline execution completed."
+        }
+        success {
+            echo "Cluster is up and running!"
+        }
+        failure {
+            echo "Something went wrong. Check the logs."
         }
     }
 }
