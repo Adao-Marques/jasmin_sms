@@ -1,19 +1,15 @@
-# Criação do Namespace para o MetalLB
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: metallb-system
-
----
-# Configuração do MetalLB com protocolo Layer 2
 apiVersion: metallb.io/v1beta1
-kind: Config
+kind: IPAddressPool
 metadata:
-  name: config
-  namespace: metallb-system
+  name: management-network
 spec:
-  address-pools:
-  - name: default
-    protocol: layer2
-    addresses:
-    - 192.168.1.240-192.168.1.250  # Faixa de IPs que o MetalLB usará
+  addresses:
+    - 192.168.1.100-192.168.1.200  # Set the IP range here
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: l2-advertisement
+spec:
+  ipAddressPools:
+    - management-network

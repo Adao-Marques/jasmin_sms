@@ -75,7 +75,7 @@ metadata:
   labels:
     app: jasmin
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: jasmin
@@ -177,7 +177,7 @@ kind: Service
 metadata:
   name: jasmin-smpp-api
   annotations:
-    metallb.universe.tf/address-pool: production-network
+    metallb.universe.tf/address-pool: management-network
 spec:
   type: LoadBalancer
   selector:
@@ -192,7 +192,7 @@ kind: Service
 metadata:
   name: jasmin-http-api
   annotations:
-    metallb.universe.tf/address-pool: production-network
+    metallb.universe.tf/address-pool: management-network
 spec:
   type: LoadBalancer
   selector:
