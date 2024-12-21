@@ -1,24 +1,31 @@
 pipeline {
     agent any
-
     stages {
-        stage('List Pods') {
+        stage('Preparar') {
+            steps {
+                echo 'Verificando a configuração do kubectl'
+                sh 'kubectl version --client' // Confirma que o kubectl está instalado e funcional
+            }
+        }
+        stage('Aplicar YAMLs') {
             steps {
                 script {
-                    echo "Listando os Pods no Cluster Kubernetes"
-                    // Lista os pods no namespace padrão
-                    sh 'kubectl get pods'
+                    echo 'Aplicando arquivos YAML no Kubernetes'
+                    sh '''
+                        kubectl apply -f k8s-yaml-files/redis.yml
+                        kubectl apply -f k8s-yaml-files/rabbitmq.yml
+                        kubectl apply -f k8s-yaml-files/jasmin.yml
+                    '''
                 }
             }
         }
     }
-
     post {
-        always {
-            echo "Pipeline executada com sucesso."
+        success {
+            echo 'Arquivos YAML aplicados com sucesso!'
         }
         failure {
-            echo "Falha na execução. Verifique os logs."
+            echo 'Erro ao aplicar os arquivos YAML. Verifique os logs.'
         }
     }
 }
