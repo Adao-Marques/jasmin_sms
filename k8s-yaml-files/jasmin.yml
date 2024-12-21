@@ -200,7 +200,7 @@ spec:
   ports:
   - protocol: TCP
     port: 1401
-    targetPort: http-port
+    targetPort: 1401
 ---
 apiVersion: v1
 kind: ConfigMap
