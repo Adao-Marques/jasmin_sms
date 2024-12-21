@@ -1,15 +1,8 @@
-apiVersion: metallb.io/v1beta1
+apiVersion: metallb.io/v1alpha1
 kind: IPAddressPool
 metadata:
   name: management-network
+  namespace: metallb-system  # Aqui deve ser 'metallb-system'
 spec:
   addresses:
-    - 192.168.1.100-192.168.1.200  # Set the IP range here
----
-apiVersion: metallb.io/v1beta1
-kind: L2Advertisement
-metadata:
-  name: l2-advertisement
-spec:
-  ipAddressPools:
-    - management-network
+  - 192.168.1.240-192.168.1.250
