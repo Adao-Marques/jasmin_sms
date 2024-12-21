@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        KUBECONFIG = 'kubeconfig.txt' // Caminho para o arquivo kubeconfig
+    }
     stages {
         stage('Preparar') {
             steps {
