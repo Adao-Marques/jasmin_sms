@@ -170,7 +170,7 @@ spec:
   ports:
   - protocol: TCP
     port: 8990
-    targetPort: cli-port
+    targetPort: 8990
 ---
 apiVersion: v1
 kind: Service
@@ -185,7 +185,7 @@ spec:
   ports:
   - protocol: TCP
     port: 2775
-    targetPort: smpp-port
+    targetPort: 2775
 ---
 apiVersion: v1
 kind: Service
