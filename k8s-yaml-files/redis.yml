@@ -8,7 +8,7 @@ spec:
   hostname: redis
   containers:
   - name: redis
-    image: redis:6-alpine
+    image: redis:latest
     command:
       - redis-server
       - "/etc/redis/redis.conf"

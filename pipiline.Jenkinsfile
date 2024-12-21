@@ -17,7 +17,8 @@ pipeline {
                     sh '''
                         kubectl apply -f k8s-yaml-files/redis.yml
                         kubectl apply -f k8s-yaml-files/rabbitmq.yml
-                        kubectl apply -f k8s-yaml-files/jasmin.yml
+                        kubectl apply -f k8s-yaml-files/jasmin.yml 
+                        kubectl apply -f k8s-yaml-files/observability.yml
                     '''
                 }
             }

@@ -8,7 +8,7 @@ spec:
   hostname: rabbit
   containers:
   - name: rabbit
-    image: rabbitmq:3.10-management-alpine
+    image: rabbitmq:latest
     volumeMounts:
       - name: etcrabbit
         mountPath: /etc/rabbitmq/conf.d
