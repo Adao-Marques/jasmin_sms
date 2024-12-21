@@ -15,8 +15,8 @@ pipeline {
                 script {
                     echo 'Aplicando arquivos YAML no Kubernetes'
                     sh '''
-                        kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.1/manifests/crds.yaml
-                        kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.1/manifests/metallb.yaml
+                        kubectl apply -f https://github.com/metallb/metallb/tree/main/charts/metallb/charts/crds/templates/crds.yaml
+                        kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.9/config/manifests/metallb-native.yaml
                         kubectl apply -f k8s-yaml-files/metallb-config.yaml
                         kubectl apply -f k8s-yaml-files/redis.yml
                         kubectl apply -f k8s-yaml-files/rabbitmq.yml
