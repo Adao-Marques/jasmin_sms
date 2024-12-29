@@ -127,7 +127,7 @@ kind: Service
 metadata:
   name: grafana
   annotations:
-    metallb.universe.tf/address-pool: grafana
+    metallb.universe.tf/address-pool: test-network
 spec:
   type: LoadBalancer
   selector:
