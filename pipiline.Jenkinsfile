@@ -16,6 +16,7 @@ pipeline {
                     echo 'Aplicando arquivos YAML no Kubernetes'
                     sh '''
                         kubectl apply -f k8s-yaml-files/nginx-ingress.yml
+                        kubectl apply -f k8s-yaml-files/nginx-ingress-config.yml
                         kubectl apply -f k8s-yaml-files/redis.yml
                         kubectl apply -f k8s-yaml-files/rabbitmq.yml
                         kubectl apply -f k8s-yaml-files/jasmin.yml 
