@@ -9,4 +9,4 @@ data:
       - name: test-network
         protocol: layer2
         addresses:
-          - 192.168.49.100-192.168.49.200
+          - 192.168.40.100-192.168.40.200
