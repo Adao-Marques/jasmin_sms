@@ -15,8 +15,7 @@ pipeline {
                 script {
                     echo 'Aplicando arquivos YAML no Kubernetes'
                     sh '''
-                        kubectl apply -f k8s-yaml-files/metallb-native.yaml
-                        kubectl apply -f k8s-yaml-files/metallb-config.yaml
+                        kubectl apply -f k8s-yaml-files/nginx-ingress.yml
                         kubectl apply -f k8s-yaml-files/redis.yml
                         kubectl apply -f k8s-yaml-files/rabbitmq.yml
                         kubectl apply -f k8s-yaml-files/jasmin.yml 

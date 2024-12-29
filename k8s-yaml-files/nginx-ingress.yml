@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: application-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: applications.local
+    http:
+      paths:
+      - path: /cli
+        pathType: Prefix
+        backend:
+          service:
+            name: jasmin-cli
+            port:
+              number: 8990
+      - path: /smpp
+        pathType: Prefix
+        backend:
+          service:
+            name: jasmin-smpp-api
+            port:
+              number: 2775
+      - path: /http
+        pathType: Prefix
+        backend:
+          service:
+            name: jasmin-http-api
+            port:
+              number: 1401
+      - path: /grafana
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana
+            port:
+              number: 80
